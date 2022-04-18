@@ -91,7 +91,8 @@ class _DebubPageState extends State<DebugPage> {
                           Text(
                             item.source,
                             style: const TextStyle(
-                              color: Color(0xFF5662F6)
+                              color: Color(0xFF5662F6),
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(item.message)
