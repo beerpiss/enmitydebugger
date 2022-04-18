@@ -46,3 +46,30 @@ jobs:
       with:
         name: enmitydebugger-${{ matrix.os.name }}
         path: ${{ matrix.os.folder_name }}
+  upload-prerelease:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - 
+      uses: actions/checkout@v3
+    -
+      uses: actions/download-artifact@v3
+      with:
+        path: ./artifacts
+    - 
+      run: |
+        for i in linux macos; do
+          tar -C ./artifacts -czvf ./artifacts/enmitydebugger-$i.tar.gz enmitydebugger-$i
+        done
+        (
+          cd ./artifacts/enmitydebugger-windows
+          zip -r ../enmitydebugger-windows.zip *
+        )
+    - 
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        shopt -s globstar
+        SHORT_REV=$(git rev-parse --short HEAD)
+        gh release create -p nightly-$SHORT_REV -t "Nightly $SHORT_REV" -n "$(git log -1 --pretty=%B)" ./artifacts/*.zip ./artifacts/*.tar.gz
+    
