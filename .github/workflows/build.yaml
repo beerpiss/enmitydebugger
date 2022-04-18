@@ -15,7 +15,7 @@ jobs:
           folder_name: build/windows/runner/Release
         - runner: macos-latest
           name: macos
-          folder_name: build/macos/Build/Products/Release
+          folder_name: build/macos/Build/Products/Release/*.app
         - runner: ubuntu-latest
           name: linux
           folder_name: build/linux/x64/release/bundle
