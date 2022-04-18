@@ -90,7 +90,7 @@ class _DebubPageState extends State<DebugPage> {
                         children: [
                           Text(
                             item.source,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Color(item.source == 'Debugger' ? 0xFF4440B0 : 0xFF5662F6),
                               fontWeight: FontWeight.bold,
                             ),
