@@ -59,7 +59,10 @@ jobs:
     - 
       run: |
         for i in linux macos; do
-          tar -C ./artifacts -czvf ./artifacts/enmitydebugger-$i.tar.gz enmitydebugger-$i
+        (
+          cd ./artifacts/enmitydebugger-$i
+          tar -czvf ./artifacts/enmitydebugger-$i.tar.gz *
+        )
         done
         (
           cd ./artifacts/enmitydebugger-windows
