@@ -61,7 +61,7 @@ jobs:
         for i in linux macos; do
         (
           cd ./artifacts/enmitydebugger-$i
-          tar -czvf ./artifacts/enmitydebugger-$i.tar.gz *
+          tar -czvf ../enmitydebugger-$i.tar.gz *
         )
         done
         (
