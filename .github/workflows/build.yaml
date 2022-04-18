@@ -20,6 +20,7 @@ jobs:
         flutter config --enable-windows-desktop
         flutter create .
         flutter build windows
+        ls build/windows/runner
     - 
       uses: actions/upload-artifact@v3
       with:
