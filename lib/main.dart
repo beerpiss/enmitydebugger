@@ -41,6 +41,7 @@ class DebugPage extends StatefulWidget {
 class _DebubPageState extends State<DebugPage> {
   final TextEditingController _textEditingController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final FocusNode _focusNode = FocusNode();
   Color inputBackgroundColor = const Color(0xFF292B2F);
 
   void sendMessage() {
@@ -60,6 +61,7 @@ class _DebubPageState extends State<DebugPage> {
   void dispose() {
     _textEditingController.dispose();
     _scrollController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -116,6 +118,8 @@ class _DebubPageState extends State<DebugPage> {
             ),
             child: TextField(
               controller: _textEditingController,
+              focusNode: _focusNode,
+              autofocus: true,
               style: const TextStyle(
                 fontSize: 12,
               ),
@@ -132,6 +136,7 @@ class _DebubPageState extends State<DebugPage> {
                   onPressed: () {
                     sendMessage();
                     _textEditingController.clear();
+                    _focusNode.requestFocus();
                   },
                   icon: const Icon(Icons.send)
                 )
@@ -139,6 +144,7 @@ class _DebubPageState extends State<DebugPage> {
               onSubmitted: (text) {
                 sendMessage();
                 _textEditingController.clear();
+                _focusNode.requestFocus();
               },
             ),
           )
