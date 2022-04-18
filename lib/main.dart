@@ -1,4 +1,5 @@
 import 'package:enmitydebugger/controllers/logger.dart';
+import 'package:enmitydebugger/models/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -45,6 +46,13 @@ class _DebubPageState extends State<DebugPage> {
   void sendMessage() {
     String message = _textEditingController.text;
     Get.find<WebsocketController>().sendMessage(message);
+    Get.find<LoggerController>().addMessage(
+      Message(
+        1,
+        message,
+        "Debugger"
+      )
+    );
     //_scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   }
 
@@ -122,12 +130,14 @@ class _DebubPageState extends State<DebugPage> {
                 suffixIcon: IconButton(
                   onPressed: () {
                     sendMessage();
+                    _textEditingController.clear();
                   },
                   icon: const Icon(Icons.send)
                 )
               ),
               onSubmitted: (text) {
                 sendMessage();
+                _textEditingController.clear();
               },
             ),
           )
