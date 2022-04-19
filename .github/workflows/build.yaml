@@ -73,6 +73,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         shopt -s globstar
-        SHORT_REV=$(git rev-parse --short HEAD)
-        gh release create -p nightly-$SHORT_REV -t "Nightly $SHORT_REV" -n "$(git log -1 --pretty=%B)" ./artifacts/*.zip ./artifacts/*.tar.gz
+        gh release create -p $(git describe --tags) -t "Nightly $(git describe --tags)" -n "$(git log -1 --pretty=%B)" ./artifacts/*.zip ./artifacts/*.tar.gz
     
