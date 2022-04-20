@@ -64,16 +64,18 @@ jobs:
         (
           cd ./artifacts/enmitydebugger-$i
           tar -czvf ../enmitydebugger-$i.tar.gz *
+          sha256sum ../enmitydebugger-$i.tar.gz > ../enmitydebugger-$i.tar.gz.sha256
         )
         done
         (
           cd ./artifacts/enmitydebugger-windows
           zip -r ../enmitydebugger-windows.zip *
+          sha256sum ../enmitydebugger-windows.zip > ../enmitydebugger-windows.zip.sha256
         )
     - 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         shopt -s globstar
-        gh release create -p $(git describe --tags) -t "Nightly $(git describe --tags)" -n "$(git log -1 --pretty=%B)" ./artifacts/*.zip ./artifacts/*.tar.gz
+        gh release create -p $(git describe --tags) -t "Nightly $(git describe --tags)" -n "$(git log -1 --pretty=%B)" ./artifacts/*.zip ./artifacts/*.tar.gz ./artifacts/*.sha256
     
